@@ -7,3 +7,6 @@ __pycache__/
 # Исключить файлы ОС
 .DS_Store
 Thumbs.db
+#
+.idea/
+idea/

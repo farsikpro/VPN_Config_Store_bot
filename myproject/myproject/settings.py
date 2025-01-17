@@ -15,7 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-TOKEN = '7644689012:AAGCgWExFokeppgG99AcMP4t4hvHvbsDsLk'
+TOKEN = ''
 
 LOGGING = {
     'version': 1,
