@@ -60,7 +60,7 @@ async def receive_payment_screenshot(update: Update, context: ContextTypes.DEFAU
 async def check_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(f"Проверка статуса для пользователя {update.message.from_user.id}")
     try:
-        # Получаем клиента асинхронно
+        # Получаем клиента
         client = await sync_to_async(Client.objects.get)(telegram_id=str(update.message.from_user.id))
         now = timezone.now()
         if client.subscription_end and client.subscription_end > now:
@@ -69,7 +69,7 @@ async def check_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
             hours = remaining_time.seconds // 3600
             minutes = (remaining_time.seconds % 3600) // 60
 
-            # Обернуть доступ к assigned_config
+            # Оборачивание доступа к assigned_config
             assigned_config = await sync_to_async(lambda: client.assigned_config)()
 
             if assigned_config:
@@ -120,7 +120,7 @@ async def send_vpn_config(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Получить или создать клиента
     client, created = await sync_to_async(Client.objects.get_or_create)(telegram_id=telegram_id)
 
-    # Оберните доступ к client.assigned_config
+    # Оберачивание доступа к client.assigned_config
     assigned_config = await sync_to_async(lambda: client.assigned_config)()
 
     if assigned_config:
@@ -206,7 +206,7 @@ async def unknown_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         user_id = update.message.from_user.id
         user_name = update.message.from_user.first_name
 
-        # Отправляем вопрос владельцу
+        # Отправляем вопрос
         await context.bot.send_message(
             chat_id=OWNER_TELEGRAM_ID,
             text=f"📩 *Вопрос от {user_name} (ID: {user_id}):*\n{question}",
@@ -245,7 +245,7 @@ async def reply_to_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def ask_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('Пожалуйста, напишите свой вопрос, и мы ответим вам в ближайшее время.')
-    # Устанавливаем флаг, что пользователь сейчас в режиме ввода вопроса
+    # Устанавливаем флаг
     context.user_data['is_asking_question'] = True
 
 async def send_instructions(update: Update, context: ContextTypes.DEFAULT_TYPE):
