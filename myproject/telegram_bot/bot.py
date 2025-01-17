@@ -24,8 +24,8 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-TOKEN = '7644689012:AAGCgWExFokeppgG99AcMP4t4hvHvbsDsLk'
-OWNER_TELEGRAM_ID = '545772261'
+TOKEN = ''
+OWNER_TELEGRAM_ID = ''
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [['Купить товар'], ['Статус'], ['Задать вопрос'], ['Инструкция']]
